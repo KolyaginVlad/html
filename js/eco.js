@@ -188,6 +188,10 @@ function show_question(num) {
     } else if (questions[qnumcur].qtype === "select") {
         let answ = document.getElementById('answ');
         let slct = document.createElement('select');
+        let option = document.createElement('option');
+        option.innerHTML += "Выберите ответ";
+        option.value = "Выберите ответ";
+        slct.appendChild(option);
         for (var i = 0; i < questions[qnumcur].answers.length; i++) {
             let option = document.createElement('option');
             option.innerHTML += questions[qnumcur].answers[i];

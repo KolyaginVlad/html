@@ -9,6 +9,7 @@ class Question {
         this.useransws = [];
     }
 
+
     addansw() {
         //Теперь обрабатываем ответы тут
         //В классе мы имеем доступ к полям конкретного вопроса, поэтому нам не нужно смотреть в массив. Нужный
@@ -37,13 +38,13 @@ class Question {
             this.useransws = answsec;
         } else if (this.qtype === 'text') {
             let answtext = document.getElementById('textt').value;
-                this.useransws = answtext;
+            this.useransws = answtext;
         }
         //Этой строчкой можешь посмотреть что и в какой момент сохраняется
         //alert(this.useransws);
     }
-}
 
+}
 let questions =
     [
         new Question("radiobutton",
@@ -81,8 +82,7 @@ let questions =
             "8. Решите ребус, чтобы узнать, какое животное считается одним из самых красивых,в Байкальском заповеднике: изюм'+''бобр+''''олень",
             "изюбрь", 'изюбрь')];
 
-//TODO Незабудь убрать комментарий в релизе)
-//let sinterval;
+let sinterval;
 
 function showdisplay() {
     begint();
@@ -99,10 +99,8 @@ function showdisplay() {
                 \n\ onclick="show_question(1)"> <br>';
     display += '<input class="button_q" type="button" value="2" \n\
                 \n\ onclick="show_question(2)"> <br>';
-    //С запятой которая тут была я поржал... Она не давала обновлять страницу
     display += '<input class="button_q" type="button" value="3" \n\
-                \n\ onclick="show_question(3)"> <br>';
-    //
+                \n\ onclick="show_question(3), check(3)"> <br>';
     display += '<input class="button_q" type="button" value="4" \n\
                 \n\ onclick="show_question(4)"> <br>';
     display += '<input class="button_q" type="button" value="5" \n\
@@ -127,13 +125,11 @@ function begint() {
 function timeout() {
     alert("Время вышло!");
     //window.open("html/end.html","_self");
-    //Я думаю тут можно переходить на окно результатов
-    //TODO Поменяй если я не прав
     finish();
 }
 
 function interval() {
-    let timer = document.getElementById("timer");
+    let timer = document.getElementById("clock");
     let time = timer.innerText.split(":");
     if (time[1] === "00" && time[0] !== "0") {
         time[0] = Number.parseInt(time[0]) - 1;
@@ -146,62 +142,54 @@ function interval() {
 }
 
 function show_question(num) {
-    //Оно кидало синтаксическую ошибку
-    // var callfunc = (show_question(){
-    //     var called = false;
-    // })
-    //Если это не первый открытый вопрос, то записывал ответ на предыдущий
-    if (qnumcur!==-1)
-        questions[qnumcur].addansw()
+    if (qnumcur !== -1)
+        questions[qnumcur].addansw();
     qnumcur = num - 1;
-    document.getElementById('qst').innerHTML = questions[qnumcur].qtext;
+    document.getElementById('qst').innerHTML = questions[num - 1].qtext;
     document.getElementById('answ').innerHTML = "";
-    if (questions[qnumcur].qtype === "checkbox") {
+    if (questions[num - 1].qtype === "checkbox") {
         let answ = document.getElementById('answ');
-        for (var i = 0; i < questions[qnumcur].answers.length; i++) {
+        for (var i = 0; i < questions[num - 1].answers.length; i++) {
             let chck = document.createElement('input');
             let lbl = document.createElement('label');
             lbl.appendChild(chck);
             chck.type = 'checkbox';
             chck.name = 'ch';
             chck.id = 'chck' + i;
-            //true это булево значение и пишется без ковычек. Убрал, потому что всё должно быть пустое для проверки
-            // отвечал ли пользователь
-            //chck.checked = 'true';
-            lbl.innerHTML += questions[qnumcur].answers[i];
+            lbl.innerHTML += questions[num - 1].answers[i];
             answ.appendChild(lbl);
             answ.appendChild(document.createElement('br'));
         }
-    } else if (questions[qnumcur].qtype === "radiobutton") {
+    } else if (questions[num - 1].qtype === "radiobutton") {
         let answ = document.getElementById('answ');
-        for (var i = 0; i < questions[qnumcur].answers.length; i++) {
+        for (var i = 0; i < questions[num - 1].answers.length; i++) {
             let rdb = document.createElement('input');
             let lbl = document.createElement('label');
             lbl.appendChild(rdb);
             rdb.type = 'radio';
             rdb.name = 'rb';
             rdb.id = 'rdbt' + i;
-            lbl.innerHTML += questions[qnumcur].answers[i];
+            lbl.innerHTML += questions[num - 1].answers[i];
             answ.appendChild(lbl);
             answ.appendChild(document.createElement('br'));
         }
-    } else if (questions[qnumcur].qtype === "select") {
+    } else if (questions[num - 1].qtype === "select") {
         let answ = document.getElementById('answ');
         let slct = document.createElement('select');
         let option = document.createElement('option');
         option.innerHTML += "Выберите ответ";
         option.value = "Выберите ответ";
         slct.appendChild(option);
-        for (var i = 0; i < questions[qnumcur].answers.length; i++) {
-            let option = document.createElement('option');
-            option.innerHTML += questions[qnumcur].answers[i];
-            option.value = questions[qnumcur].answers[i];
+        for (var i = 0; i < questions[num - 1].answers.length; i++) {
+            option = document.createElement('option');
+            option.innerHTML += questions[num - 1].answers[i];
+            option.value = questions[num - 1].answers[i];
             slct.appendChild(option);
         }
         slct.id = 'sec';
         answ.appendChild(slct);
         answ.appendChild(document.createElement('br'));
-    } else if (questions[qnumcur].qtype === "text") {
+    } else if (questions[num - 1].qtype === "text") {
         let answ = document.getElementById('answ');
         let tx = document.createElement('input');
         answ.appendChild(tx);
@@ -209,45 +197,12 @@ function show_question(num) {
         answ.appendChild(document.createElement('br'));
 
     }
-    //У тебя на этом моменте уже сменились элементы страницы и к старым данным ты доступа не имеешь
-    //check();
-
 }
-
-//Перенёс в класс
-// function check(num) {
-//     //Убрал ввиду не логичности... Если уж ты передаёшь num, то нам не нужна переменная qnumcur
-//     //qnumcur = num - 1;
-//     if (questions[qnumcur].qtype === 'checkbox') {
-//         let answarr = [];
-//         for (var i = 0; i < questions[num - 1].answers.length; i++) {
-//
-//             answarr[i] = document.getElementById('chck' + i).checked;
-//             questions[qnumcur].addansw(answarr);
-//         }
-//     } else if (questions[qnumcur].qtype === 'radiobutton') {
-//         for (var i = 0; i < questions[num - 1].answers.length; i++) {
-//             if (document.getElementById('rdbt' + i).checked) {
-//                 questions[qnumcur].addansw(i);
-//                 break;
-//             }
-//         }
-//     } else if (questions[qnumcur].qtype === 'select') {
-//         let answsec = document.getElementById('sec').value;
-//         questions[qnumcur].addansw(answsec);
-//     } else if (questions[qnumcur].qtype === 'text') {
-//         let answtext = document.getElementById('textt').value;
-//         questions[qnumcur].addansw(answtext);
-//     }
-//
-// }
 
 function finish() {
     window.open("html/end.html", "_self");
-    //Если был открыт хотя бы один вопрос, то записывал ответ на него
-    if (qnumcur!==-1)
-        questions[questions].addansw()
-
+    if (qnumcur !== -1)
+        questions[questions].addansw();
 }
 
 /*const results =

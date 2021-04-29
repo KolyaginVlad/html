@@ -147,30 +147,50 @@ function show_question(num) {
     qnumcur = num - 1;
     document.getElementById('qst').innerHTML = questions[num - 1].qtext;
     document.getElementById('answ').innerHTML = "";
-    if (questions[num - 1].qtype === "checkbox") {
+    if (questions[num -1].qtype === "checkbox") {
         let answ = document.getElementById('answ');
         for (var i = 0; i < questions[num - 1].answers.length; i++) {
-            let chck = document.createElement('input');
-            let lbl = document.createElement('label');
-            lbl.appendChild(chck);
-            chck.type = 'checkbox';
-            chck.name = 'ch';
-            chck.id = 'chck' + i;
-            lbl.innerHTML += questions[num - 1].answers[i];
-            answ.appendChild(lbl);
+            //Если в массиве будет true, то поставится галочка
+            if (questions[num -1].useransws[i])
+            answ.innerHTML +=
+                "<label><input type='checkbox' id='chck" + i + "' name='ch' checked='checked'>" + questions[num - 1].answers[i] + "</label>";
+            else
+                answ.innerHTML +=
+                    "<label><input type='checkbox' id='chck" + i + "' name='ch'>" + questions[num - 1].answers[i] + "</label>";
+            // let chck = document.createElement('input');
+            // let lbl = document.createElement('label');
+            // chck.type = 'checkbox';
+            // chck.name = 'ch';
+            // chck.id = 'chck' + i;
+            //
+            // if (questions[num -1].useransws[i])
+            //     chck.checked = true;
+            // lbl.appendChild(chck);
+            // lbl.innerHTML += questions[num - 1].answers[i];
+            // answ.appendChild(lbl);
             answ.appendChild(document.createElement('br'));
         }
     } else if (questions[num - 1].qtype === "radiobutton") {
         let answ = document.getElementById('answ');
         for (var i = 0; i < questions[num - 1].answers.length; i++) {
-            let rdb = document.createElement('input');
-            let lbl = document.createElement('label');
-            lbl.appendChild(rdb);
-            rdb.type = 'radio';
-            rdb.name = 'rb';
-            rdb.id = 'rdbt' + i;
-            lbl.innerHTML += questions[num - 1].answers[i];
-            answ.appendChild(lbl);
+            //Если номер ответа совпадёт с порядковым номером radio, то она выберется
+            if (questions[num - 1].useransws===i)
+                answ.innerHTML +=
+                    "<label><input type='radio' id='rdbt" + i + "' name='rb'checked='checked'>" + questions[num - 1].answers[i] + "</label>";
+            else
+                answ.innerHTML +=
+                    "<label><input type='radio' id='rdbt" + i + "' name='rb'>" + questions[num - 1].answers[i] + "</label>";
+            // let rdb = document.createElement('input');
+            // let lbl = document.createElement('label');
+            // rdb.type = 'radio';
+            // rdb.name = 'rb';
+            // rdb.id = 'rdbt' + i;
+            //
+            // if (questions[num - 1].useransws===i)
+            //     rdb.checked = true;
+            // lbl.appendChild(rdb);
+            // lbl.innerHTML += questions[num - 1].answers[i];
+            // answ.appendChild(lbl);
             answ.appendChild(document.createElement('br'));
         }
     } else if (questions[num - 1].qtype === "select") {
@@ -187,11 +207,15 @@ function show_question(num) {
             slct.appendChild(option);
         }
         slct.id = 'sec';
+        //Ставим то, что раньше выбрал пользователь, если он что-то выбирал
+        if (questions[num - 1].useransws!="")
+            slct.value = questions[num - 1].useransws;
         answ.appendChild(slct);
         answ.appendChild(document.createElement('br'));
     } else if (questions[num - 1].qtype === "text") {
         let answ = document.getElementById('answ');
         let tx = document.createElement('input');
+        tx.value = questions[num - 1].useransws;
         answ.appendChild(tx);
         tx.id = 'textt';
         answ.appendChild(document.createElement('br'));

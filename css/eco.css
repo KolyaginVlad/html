@@ -1,18 +1,20 @@
 body {
-    background: #ff6a78;
-    background: linear-gradient(to bottom, #ff6a78, #ffa57c);
+    background: linear-gradient(to bottom, #ff6a78, #ffa57c) fixed;
     font-family: sans-serif;
     font-variant: small-caps;
+    color: #7e3462;
 }
 
 h1{
   color: #562d5a;
-  text-align:center;  
+  text-align:center; 
+  font-size: 45px;
 }
 
 h2{
   color: #7e3462;
-  text-align:center;  
+  text-align:center; 
+   font-size: 35px;
 }
 
 #board {
@@ -24,9 +26,11 @@ h2{
     margin-right: auto;
     text-align: center;
     background-color:#ffe7d5;
-    width: 550px;
+    width: 765px;
+    height: 300px;
     font-size: 20px;
     line-height: 35px;
+    margin-top: 100px;
 }
 
 * {
@@ -45,7 +49,7 @@ h2{
   margin-right: auto;
   background-color: #f8f8f8;
 }
-input::-webkit-inner-spin-button 
+
 .input-text:focus {
   border-color: #b8476e;
 }
@@ -73,16 +77,106 @@ input::-webkit-inner-spin-button
   color: #ff6a78;
 }
 
+#btn1{
+    display: none;
+}
+.btn1 {
+  position: absolute;
+  top: 35%;
+  left: 9%;
+  font-size: 100px;
+  background-color: #ffe7d5;
+  border: 2px #b8476e;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #ff6a78;
+  padding: 5px 10px;
+}
+
+.btn1:hover {
+  color: #ffe7d5;
+  border-color: #b8476e;
+  background-color: #ff6a78;
+}
+
+.btn1:active {
+  background-color: #ff6a78;
+  border-color: #b8476e;
+  color: #ffe7d5;
+}
+
+#end{
+    margin-top: 15px;
+    font-size: 30px;
+    text-align: center;
+}
+#clock{
+    font-size: 30px;
+    text-align: center;
+    background: #f8d2af;
+    padding: 10px;
+    border: solid #b8476e 2px;
+    border-radius: 10px;
+}
+
+#tbl {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+font-family: sans-serif;
+font-variant: small-caps;
+text-align: center;
+border-collapse: separate;
+border-spacing: 5px;
+background:#f8f8f8;
+color: #562d5a;
+border: 16px solid #f8f8f8;
+border-radius: 20px;
+text-align: center;
+}
+
+#vpr { 
+    width: 130px;
+    color:#562d5a;
+    font-size: 18px;
+    padding: 10px;
+    text-align: left;
+}
+#right {
+    color:#562d5a;
+    font-size: 18px;
+    padding: 10px;
+    text-align: center;
+}
+#otvet {
+    color:#562d5a;
+    font-size: 18px;
+    padding: 10px;
+    text-align: center;
+}
+
+#str{
+    background: #F5D7BF;
+    padding: 10px;
+    text-align: center;
+    width: 100px;
+    height: 220px;
+}
+
 .myForm {
+    
   max-width: 200px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
 }
 
-#clock {
+#clock1{
     background: #f8d2af;
     padding: 10px;
     border: solid #b8476e 2px;
@@ -96,4 +190,101 @@ input::-webkit-inner-spin-button
     border: solid black 2px;
     border-radius: 10px;
     display: inline-block;
+}
+
+#question {
+    padding: 15px;
+    border-style: solid;
+    border-color: #b8476e;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color:#ffe7d5;
+    width: 60%;
+    min-width: 1000px; 
+    height: 490px;
+    font-size: 20px;
+    line-height: 35px;
+    margin-top: 20px;
+}
+
+.button_q, #finish {
+    display: inline-block;
+    background-color: #ff6a78;
+    border: 2px #b8476e;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    color: #ffe7d5;
+    padding: 5px 10px;
+    border-radius: 7px;
+    border: 2px #b8476e;
+    padding: 5px 10px;
+    margin-left: -450px;
+    position: absolute;
+    outline: none;
+   
+  
+}
+.button_q:hover {
+  color: #ff6a78;
+  border-color: #b8476e;
+  background-color: #ffe7d5;
+}
+
+.button_q:active {
+  background-color: #ffe7d5;
+  border-color: #b8476e;
+  color: #ff6a78;
+}
+
+#answ{
+    text-align: left;
+    position: absolute;
+    left: 15%;
+    width: 800px;
+    height: 100%;
+    top: 70px;
+    margin: 0px;
+    float: left;
+}
+
+#qst {
+    text-align: left;
+    position: absolute;
+    left: 15%;
+    width: 800px;
+    height: 100%;
+    float: left;
+}
+
+#button{
+	position: relative;
+	width: 100%;
+}
+button:active {padding: 0;} 
+
+#finish{
+    margin-top: 20px;
+    width: 200px;
+    height: 40px;
+}
+
+select{
+    background: #f8f8f8;
+    font-size: 100%;
+    border-radius: 10px;
+    padding: 6px 4px;
+    border: 1px solid #b8476e;
+    color: #b8476e;
+}
+
+text{
+    background: #f8f8f8;
+    font-size: 100%;
+    border-radius: 10px;
+    padding: 6px 4px;
+    border: 1px solid #b8476e;
+    color: #b8476e;
 }

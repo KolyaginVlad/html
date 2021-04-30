@@ -19,10 +19,12 @@
             <form id="clock1" class="myForm">
             <input class="input-text" type="number" id="timer"
                    name="input-number" placeholder="Введите число" min="1" autocomplete="off">
-            <input type="button" class="btn" value="Начать тестирование" onclick="showdisplay()">
+            <input type="button" id="hide" class="btn" value="Начать тестирование" onclick="showdisplay()">
             </form>
         </div>
         <div id="1"> </div>
+       <input type="button" id="btn1" class="btn1"  value="Показать результаты теста"
+                   onclick="formTheTable()">
        
     </body>
 </html>
